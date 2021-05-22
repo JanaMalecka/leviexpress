@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './style.css';
 import { JourneyPicker } from './JourneyPicker';
 import { JourneyDetail } from '../JourneyDetail';
+import { SeatPicker } from '../SeatPicker';
 
 export const Home = () => {
   const [journey, setJourney] = useState(null);
@@ -16,7 +17,12 @@ export const Home = () => {
       {console.log(journey)}
       <JourneyPicker onJourneyChange={handleJourneyChange} />
       {/*  {journey ? <p>Nalezeno spojeni s id {journey.journeyId}</p> : null} */}
-      {journey ? <JourneyDetail journey={journey} /> : null}
+      {journey && (
+        <>
+          <JourneyDetail journey={journey} />
+          <SeatPicker seats={journey.seats} journeyId={journey.journeyId} />
+        </>
+      )}
     </>
   );
 };
